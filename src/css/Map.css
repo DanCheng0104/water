@@ -1,0 +1,7 @@
+.mapboxgl-map {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 80%;
+    height: 100%;
+};

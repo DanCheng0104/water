@@ -1,0 +1,7 @@
+.panel{
+    position: absolute;
+    top:0px;
+    left:70%;
+    /* right:0px; */
+    height:100%;
+  }
