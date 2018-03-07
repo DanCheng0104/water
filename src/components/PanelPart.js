@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import '../css/PanelPart.css';
 import { DropdownButton, MenuItem, Panel } from 'react-bootstrap';
+import '../css/style.css';
+
 
 
 class PanelPart extends Component {
@@ -11,7 +12,7 @@ class PanelPart extends Component {
   render() {
       const years = [2011,2012,2013]
     return (
-      <div className="panel">
+      <React.Fragment >
             <Panel>
                 <Panel.Heading>The City Of LA Water Consumption Map</Panel.Heading>
                 <Panel.Body>
@@ -25,7 +26,7 @@ class PanelPart extends Component {
                 </DropdownButton>
                 </Panel.Body>
             </Panel>
-      </div>
+      </React.Fragment>
     );
   }
 }

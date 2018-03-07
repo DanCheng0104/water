@@ -1,28 +1,25 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import Header from './components/Header';
 import './App.css';
 import Map from './components/Map';
 import PanelPart from './components/PanelPart';
 
 class App extends Component {
-  constructor(){
-    super();
-    this.updateYear = this.updateYear.bind(this);
-    this.state = {    
-      year : 2011
-    };
-  }
+  state = {    
+    year : 2014
+  };
 
-  updateYear(year){
+  updateYear =(year)=>{
     this.setState({year:year});
   }
   render() {
     return (
-      <div>
+      <React.Fragment>
+        <Header/>
         <Map year={this.state.year}/>
         <PanelPart year={this.state.year} updateYear={this.updateYear}/>
-
-      </div>
+      </React.Fragment>
     );
   }
 }

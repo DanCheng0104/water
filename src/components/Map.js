@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl'
 import '../../node_modules/mapbox-gl/dist/mapbox-gl.css';
-import '../css/Map.css'
+import '../css/style.css';
+import Legend from './Legend';
 import { token } from '../config.json'
 import {color} from '../palette.json'
 
 mapboxgl.accessToken = token;
 class Map extends React.Component {
-    constructor(){
-        super();
-        this.setFill = this.setFill.bind(this);
-    }
+
     componentDidUpdate() {
-        const filter = ["all",['==','YEAR',this.props.year],['!=','USAGE',-9999]];    
+        const filter = ["all",['==','YEAR',this.props.year],['!=','USAGE',-9999],['==','USETYPE','all']];    
         this.map.setFilter('nb',filter);    
         this.map.setPaintProperty("nb",'fill-color',color[this.props.year]);
       }
 
     componentDidMount() {
-      const filter = ["all",['==','YEAR',this.props.year],['!=','USAGE',-9999]];        
+      const filter = ["all",['==','YEAR',this.props.year],['!=','USAGE',-9999],['==','USETYPE','all']];        
       this.map = new mapboxgl.Map({
         container: this.mapContainer,
         style: 'mapbox://styles/mapbox/light-v9',
         zoom : 9,
-        center: [ -118.382877, 34.284700]
+        center: [ -118.382877, 34.014700]
 
       });
       this.map.on('load',()=>{
@@ -47,7 +45,7 @@ class Map extends React.Component {
       });
     }
 
-    setFill(){
+    setFill =() =>{
         this.map.setPaintProperty("nb",'fill-color',color[this.props.year]);
 
     }
@@ -57,7 +55,14 @@ class Map extends React.Component {
     }
   
     render() {
-      return <div ref={el => this.mapContainer = el} />;
+      return (
+        <React.Fragment>
+          <div ref={el => this.mapContainer = el} />
+          <Legend year ={this.props.year}/> 
+      
+          </React.Fragment>
+      )
+              
     }
   }
 
