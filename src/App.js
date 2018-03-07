@@ -13,11 +13,13 @@ class App extends Component {
   updateYear =(year)=>{
     this.setState({year:year});
   }
+
+
   render() {
     return (
       <React.Fragment>
         <Header/>
-        <Map year={this.state.year}/>
+        <Map year={this.state.year} updateYear={this.updateYear}/>
         <PanelPart year={this.state.year} updateYear={this.updateYear}/>
       </React.Fragment>
     );

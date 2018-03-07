@@ -58,7 +58,7 @@ class Map extends React.Component {
       return (
         <React.Fragment>
           <div ref={el => this.mapContainer = el} />
-          <Legend year ={this.props.year}/> 
+          <Legend year ={this.props.year} updateYear={this.props.updateYear}/> 
       
           </React.Fragment>
       )
