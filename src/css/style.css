@@ -10,6 +10,7 @@
   grid-template-columns: repeat(18,1fr);
   grid-template-rows: repeat(18,1fr);
 }
+
 .nav-menu{
   grid-row:1; 
 }
@@ -17,7 +18,7 @@
 .bot-bar{  
     font-family: Overpass,sans-serif;
     grid-row: 14/19; 
-    grid-column: 1/19; 
+    grid-column: 4/16; 
     background-color: #ffffff;
     z-index: 1;
     
@@ -47,21 +48,23 @@
 
 /* legend */
 .legend {
-  /* position: absolute; */
   display: grid;
-  grid-template-rows: 1.5fr 5fr;
-  
+  grid-template-rows: 1.5fr 5fr;  
   z-index: 1;
-  /* top:50%;
-  left:10%; */
   background-color: #ffffff;
-  /* width: 210px;
-  height: 150px; */
-  grid-row:3;
-  grid-column: 3;
+  grid-row:8/11;
+  grid-column: 3/5;
   
 }
 
+@media only screen and (max-width: 1600px), screen and (max-height: 740px)  {
+  .legend {
+    grid-row:6/13;
+    grid-column: 3/8;
+    
+  }
+  
+}
 
 .legend .arrow{
   text-align: center;
