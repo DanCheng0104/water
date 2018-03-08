@@ -4,9 +4,9 @@
   "private": true,
   "dependencies": {
     "mapbox-gl": "^0.44.1",
-    "react": "^16.2.0",
+    "react": "^16.3.0-alpha.1",
     "react-bootstrap": "^0.32.1",
-    "react-dom": "^16.2.0",
+    "react-dom": "^16.3.0-alpha.1",
     "react-mapbox-gl": "^3.8.0",
     "react-scripts": "1.1.1"
   },

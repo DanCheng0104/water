@@ -4,11 +4,13 @@ import {color} from '../label.json'
 
 
 class Legend extends Component {
-    spanLeft = React.createRef();
     handlerChange(e,year,direction){
         console.log(direction);
-        console.log(spanLeft);
-        direction==='left'?this.props.updateYear(year-1):this.props.updateYear(year+1);
+        let newYear = (direction==='left'?year-1:year+1);
+        //time period from 2011 to 2016
+        if (newYear == 2010) {newYear=2016;}
+        if (newYear == 2017) {newYear=2011;}
+        this.props.updateYear(newYear);
 
     }
 
@@ -21,9 +23,9 @@ class Legend extends Component {
         return (
         <div className="legend">
             <div className="arrow">
-                    <span class="glyphicon glyphicon-chevron-left" ref={this.spanLeft} onClick={(e)=>{this.handlerChange(e,this.props.year,"left")}}></span>
+                    <span class="glyphicon glyphicon-chevron-left"  onClick={(e)=>{this.handlerChange(e,this.props.year,"left")}}></span>
                     {this.props.year}
-                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="glyphicon glyphicon-chevron-right" onClick={(e)=>{this.handlerChange(e,this.props.year,"right")}}></span>
             </div>
             <div>
                 {listItems}

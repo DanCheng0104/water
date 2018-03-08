@@ -3,11 +3,13 @@ import mapboxgl from 'mapbox-gl'
 import '../../node_modules/mapbox-gl/dist/mapbox-gl.css';
 import '../css/style.css';
 import Legend from './Legend';
+import PanelPart from './PanelPart';
 import { token } from '../config.json'
 import {color} from '../palette.json'
 
 mapboxgl.accessToken = token;
 class Map extends React.Component {
+    mapContainer = React.createRef();
 
     componentDidUpdate() {
         const filter = ["all",['==','YEAR',this.props.year],['!=','USAGE',-9999],['==','USETYPE','all']];    
@@ -18,7 +20,7 @@ class Map extends React.Component {
     componentDidMount() {
       const filter = ["all",['==','YEAR',this.props.year],['!=','USAGE',-9999],['==','USETYPE','all']];        
       this.map = new mapboxgl.Map({
-        container: this.mapContainer,
+        container: this.mapContainer.value,
         style: 'mapbox://styles/mapbox/light-v9',
         zoom : 9,
         center: [ -118.382877, 34.014700]
@@ -57,10 +59,12 @@ class Map extends React.Component {
     render() {
       return (
         <React.Fragment>
-          <div ref={el => this.mapContainer = el} />
+          <div ref={this.mapContainer} >
           <Legend year ={this.props.year} updateYear={this.props.updateYear}/> 
-      
-          </React.Fragment>
+          <PanelPart/>
+          </div>        
+          
+        </React.Fragment>
       )
               
     }

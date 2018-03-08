@@ -1,15 +1,30 @@
 #root{
   display: grid;
-  grid-template-rows: 1fr 7fr 3fr;
+  grid-auto-rows: 1fr 10fr;
   grid-template-columns: auto;
   height: 100vh;
 }
-
-.panel-default{
+.mapboxgl-map{
+  grid-row:2; 
+  display: grid;
+  grid-template-columns: repeat(18,1fr);
+  grid-template-rows: repeat(18,1fr);
+}
+.nav-menu{
+  grid-row:1; 
+}
+/* PanelPart */
+.bot-bar{  
     font-family: Overpass,sans-serif;
-    margin-bottom: 0px;
-  } 
-
+    grid-row: 14/19; 
+    grid-column: 1/19; 
+    background-color: #ffffff;
+    z-index: 1;
+    
+} 
+.bot-bar span{
+  margin-left:50%;
+}
   /* Header.css */
 .nav-menu a {
   font-family: Overpass,sans-serif;
@@ -32,16 +47,18 @@
 
 /* legend */
 .legend {
-  position: absolute;
+  /* position: absolute; */
   display: grid;
   grid-template-rows: 1.5fr 5fr;
   
   z-index: 1;
-  top:50%;
-  left:10%;
+  /* top:50%;
+  left:10%; */
   background-color: #ffffff;
-  width: 210px;
-  height: 150px;
+  /* width: 210px;
+  height: 150px; */
+  grid-row:3;
+  grid-column: 3;
   
 }
 

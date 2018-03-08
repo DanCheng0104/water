@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import Header from './components/Header';
 import './App.css';
 import Map from './components/Map';
-import PanelPart from './components/PanelPart';
+// import PanelPart from './components/PanelPart';
 
 class App extends Component {
   state = {    
@@ -14,13 +14,12 @@ class App extends Component {
     this.setState({year:year});
   }
 
-
   render() {
     return (
       <React.Fragment>
-        <Header/>
+        <Header/>        
         <Map year={this.state.year} updateYear={this.updateYear}/>
-        <PanelPart year={this.state.year} updateYear={this.updateYear}/>
+        {/* <PanelPart/> */}
       </React.Fragment>
     );
   }
