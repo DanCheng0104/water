@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Panel } from 'react-bootstrap';
+// import { Panel } from 'react-bootstrap';
 import '../css/style.css';
 
 
@@ -23,7 +23,7 @@ class PanelPart extends Component {
       const years = [2011,2012,2013]
     return (      
       <div className='bot-bar' ref={this.panelRef}>
-        <span class="glyphicon glyphicon-chevron-down" onClick={(e)=>this.ArrowChange(e)}></span>
+        <span className="glyphicon glyphicon-chevron-down" onClick={(e)=>this.ArrowChange(e)}></span>
 
       </div>
       

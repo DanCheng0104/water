@@ -13,12 +13,15 @@ class Map extends React.Component {
 
     componentDidUpdate() {
         const filter = ["all",['==','YEAR',this.props.year],['!=','USAGE',-9999],['==','USETYPE','all']];    
-        this.map.setFilter('nb',filter);    
+        const filter_mask = ["all",['==','YEAR',this.props.year],['==','USAGE',-9999],['==','USETYPE','all']];
+        this.map.setFilter('nb',filter);
+        this.map.setFilter('nb_mask',filter_mask);    
         this.map.setPaintProperty("nb",'fill-color',color[this.props.year]);
       }
 
     componentDidMount() {
-      const filter = ["all",['==','YEAR',this.props.year],['!=','USAGE',-9999],['==','USETYPE','all']];        
+      const filter_unmask = ["all",['==','YEAR',this.props.year],['!=','USAGE',-9999],['==','USETYPE','all']]; 
+      const filter_mask = ["all",['==','YEAR',this.props.year],['==','USAGE',-9999],['==','USETYPE','all']];        
       this.map = new mapboxgl.Map({
         container: this.mapContainer.value,
         style: 'mapbox://styles/mapbox/light-v9',
@@ -41,9 +44,27 @@ class Map extends React.Component {
                 "fill-outline-color": "#e1cdb5",
                 'fill-opacity': 1
             },
-            "filter":filter
-        });
+            "filter":filter_unmask
+          });
+          this.map.addLayer({
+            "id": "nb_mask",
+            "source": "geos",
+            "source-layer": "usage_nbgeojson",
+            "type": "fill",
+            "paint": {
+                "fill-outline-color": "#e1cdb5",
+                'fill-opacity': 0.5,
+                'fill-color':"grey"
+            },
+            "filter":filter_mask
+          });
         this.setFill(this.props.year);
+      });
+
+      //query results
+      this.map.on('click',(e)=>{
+        const features = this.map.queryRenderedFeatures(e.point,['nb'])
+        console.log(features);
       });
     }
 
@@ -60,10 +81,9 @@ class Map extends React.Component {
       return (
         <React.Fragment>
           <div ref={this.mapContainer} >
-          <Legend year ={this.props.year} updateYear={this.props.updateYear}/> 
-          <PanelPart/>
-          </div>        
-          
+            <Legend year ={this.props.year} updateYear={this.props.updateYear}/> 
+            <PanelPart/>
+          </div>                
         </React.Fragment>
       )
               

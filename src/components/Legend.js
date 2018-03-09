@@ -8,8 +8,8 @@ class Legend extends Component {
         console.log(direction);
         let newYear = (direction==='left'?year-1:year+1);
         //time period from 2011 to 2016
-        if (newYear == 2010) {newYear=2016;}
-        if (newYear == 2017) {newYear=2011;}
+        if (newYear === 2010) {newYear=2016;}
+        if (newYear === 2017) {newYear=2011;}
         this.props.updateYear(newYear);
 
     }
@@ -18,7 +18,7 @@ class Legend extends Component {
         const legends = color[this.props.year];
         const colors= Object.keys(legends);
         const listItems = colors.map((color) =>
-        <div className="legendContainer"><span style={{'background-color': color}}></span><div className="legendTag">{legends[color]}</div></div>
+        <div className="legendContainer" key={color}><span style={{'background-color': color}}></span><div className="legendTag">{legends[color]}</div></div>
         );
         return (
         <div className="legend">
