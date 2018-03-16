@@ -14,7 +14,7 @@ class Map extends React.Component {
     componentDidUpdate() {
         const filter = ["all",['==','YEAR',this.props.year],['!=','USAGE',-9999],['==','USETYPE','all']];    
         const filter_mask = ["all",['==','YEAR',this.props.year],['==','USAGE',-9999],['==','USETYPE','all']];
-        this.map.setFilter('nb',filter);
+        this.map.setFilter('nb_nomask',filter);
         this.map.setFilter('nb_mask',filter_mask);    
         this.map.setPaintProperty("nb",'fill-color',color[this.props.year]);
       }
@@ -36,7 +36,7 @@ class Map extends React.Component {
           })
 
           this.map.addLayer({
-            "id": "nb",
+            "id": "nb_nomask",
             "source": "geos",
             "source-layer": "usage_nbgeojson",
             "type": "fill",
@@ -45,6 +45,16 @@ class Map extends React.Component {
                 'fill-opacity': 1
             },
             "filter":filter_unmask
+          });
+          this.map.addLayer({
+            "id": "nb_all",
+            "source": "geos",
+            "source-layer": "usage_nbgeojson",
+            "type": "fill",
+            "paint": {
+              "fill-outline-color": "#e1cdb5",
+              'fill-opacity': 0
+            }
           });
           this.map.addLayer({
             "id": "nb_mask",
@@ -63,13 +73,33 @@ class Map extends React.Component {
 
       //query results
       this.map.on('click',(e)=>{
-        const features = this.map.queryRenderedFeatures(e.point,['nb'])
-        console.log(features);
+        this.props.updateBar(true);
+        const features = this.map.queryRenderedFeatures(e.point,{layers:['nb_all']});
+        const usetypes = ["commercial","institutional","other","industrial","res","mixed_use"];
+        const years = [2011,2012,2013,2014,2015,2016];
+        let tempData = {"commercial":[],"institutional":[],"other":[],"industrial":[],"res":[],"mixed_use":[]};
+        
+        usetypes.forEach((usetype)=>{
+          years.forEach((year)=>{
+            features.forEach((feature)=>{
+              if (feature.properties.YEAR == year & feature.properties.USETYPE == usetype){
+                const usage = feature.properties.USAGE == -9999? 0:feature.properties.USAGE;
+                tempData[usetype].push(usage);
+              }
+            })
+          })
+        })
+        console.log(tempData);
+        //getChartData
       });
     }
 
+    getChartData =()=>{
+
+    }
+
     setFill =() =>{
-        this.map.setPaintProperty("nb",'fill-color',color[this.props.year]);
+        this.map.setPaintProperty("nb_nomask",'fill-color',color[this.props.year]);
 
     }
   
@@ -82,7 +112,7 @@ class Map extends React.Component {
         <React.Fragment>
           <div ref={this.mapContainer} >
             <Legend year ={this.props.year} updateYear={this.props.updateYear}/> 
-            <PanelPart/>
+            <PanelPart barDisplay={this.props.barDisplay} updateBar={this.props.updateBar}/>
           </div>                
         </React.Fragment>
       )

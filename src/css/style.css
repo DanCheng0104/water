@@ -17,7 +17,7 @@
 /* PanelPart */
 .bot-bar{  
     font-family: Overpass,sans-serif;
-    grid-row: 14/19; 
+    grid-row: 18/18; 
     grid-column: 4/16; 
     background-color: #ffffff;
     z-index: 1;
@@ -26,6 +26,11 @@
 .bot-bar span{
   margin-left:50%;
 }
+/* chart */
+/* canvas {
+  height:234px;
+  width:1280px;
+} */
   /* Header.css */
 .nav-menu a {
   font-family: Overpass,sans-serif;
@@ -53,7 +58,7 @@
   z-index: 1;
   background-color: #ffffff;
   grid-row:8/11;
-  grid-column: 3/5;
+  grid-column: 1/3;
   
 }
 

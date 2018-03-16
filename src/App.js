@@ -7,18 +7,23 @@ import Footer from './components/Footer';
 
 class App extends Component {
   state = {    
-    year : 2014
+    year : 2014,
+    barDisplay: false
   };
 
   updateYear =(year)=>{
     this.setState({year:year});
   }
 
+  updateBar =(display)=>{
+    this.setState({barDisplay:display});
+  }
+
   render() {
     return (
       <React.Fragment>
         <Header/>        
-        <Map year={this.state.year} updateYear={this.updateYear}/>
+        <Map year={this.state.year} updateYear={this.updateYear} barDisplay={this.state.barDisplay} updateBar={this.updateBar}/>
         <Footer/>
       </React.Fragment>
     );

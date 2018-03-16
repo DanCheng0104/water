@@ -18,7 +18,7 @@ class Legend extends Component {
         const legends = color[this.props.year];
         const colors= Object.keys(legends);
         const listItems = colors.map((color) =>
-        <div className="legendContainer" key={color}><span style={{'background-color': color}}></span><div className="legendTag">{legends[color]}</div></div>
+        <div className="legendContainer" key={color}><span style={{'backgroundColor': color}}></span><div className="legendTag">{legends[color]}</div></div>
         );
         return (
         <div className="legend">
